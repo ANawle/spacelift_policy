@@ -1,1 +1,1 @@
-spacelift_api_token = "spacelift-api-token_d773a6213d2da50e99cf3e97efa82a01631b599411a323477b3cfa39fef23d73"
+spacelift_api_token = spacelift-api-token_d773a6213d2da50e99cf3e97efa82a01631b599411a323477b3cfa39fef23d73
