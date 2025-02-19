@@ -17,7 +17,6 @@ variable "spacelift_api_token" {
   sensitive   = true
 }
 
-# Create a security policy that requires security team approval for changes to aws_iam_policy
 resource "spacelift_policy" "security_approval" {
   name        = "Require Security Approval for IAM Policy Changes"
   type        = "PLAN"
@@ -25,11 +24,10 @@ resource "spacelift_policy" "security_approval" {
   description = "Ensures that security team must approve any aws_iam_policy changes."
 }
 
-# Data source to fetch all stacks from Spacelift
 data "spacelift_stacks" "all_stacks" {}
 
-# Attach the security approval policy to every stack
 resource "spacelift_policy_attachment" "attach_to_all_stacks" {
+  for_each  = { for s in data.spacelift_stacks.all_stacks.stacks : s.id => s }
   policy_id = spacelift_policy.security_approval.id
-  stack_ids = [for stack in data.spacelift_stacks.all_stacks.stacks : stack.id]
+  stack_id  = each.key
 }
