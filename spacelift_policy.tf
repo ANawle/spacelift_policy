@@ -13,8 +13,8 @@ provider "spacelift" {
 
 variable "spacelift_api_token" {
   description = "API token for Spacelift"
-  type        = string
-  sensitive   = false
+  type        = any
+  sensitive   = true
 }
 
 resource "spacelift_policy" "security_approval" {
